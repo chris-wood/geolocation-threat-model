@@ -1,0 +1,207 @@
+
+
+
+
+Network Working Group                                          C.A. Wood
+Internet-Draft                                                Cloudflare
+Intended status: Informational                            25 August 2021
+Expires: 26 February 2022
+
+
+                       A Geolocation Threat Model
+                 draft-geolocation-threat-model-latest
+
+Abstract
+
+   This document describes a threat model for geolocation services.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 26 February 2022.
+
+Copyright Notice
+
+   Copyright (c) 2021 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Simplified BSD License text
+   as described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Simplified BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Requirements Notation
+   3.  Geolocation Background
+     3.1.  Use Cases
+     3.2.  Geoocation Sources
+   4.  Threat Model and Problem Statement
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  Normative References
+   Author's Address
+
+1.  Introduction
+
+   Many online services perform geolocation using IP-based databases.
+   In general, such databases map IP addresses to geographic locations.
+   Most client devices also offer APIs for retrieving geographic
+   locations.  Providers of these databases and APIs often combine
+   multiple, and sometimes private or privileged, sources of information
+   for the mappings.  Moreover, the details of mapping construction is
+   proprietary.
+
+   One aspect these services do have in common is that the mapping lacks
+   authenticity.  In particular, neither online services nor client APIs
+   provide any assurance that the location output is correct.  This is
+   problematic considering that such location information is often used
+   for critical applications, including security and policy enforcement,
+   content customization, and advertisements.
+
+   Addressing these shortcomings requires clarity on the problems being
+   solved by geolocation mechanisms.  Moreover, for those problems, it
+   is important to identify the threat model describing the behavior of
+   different system entities.  This document is an attempt to start the
+   discussion on these topics.
+
+2.  Requirements Notation
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  Geolocation Background
+
+   This section describes use cases for geolocation services and sources
+   for this information.
+
+3.1.  Use Cases
+
+   User location has a number of critical use cases on the web,
+   including, though not limited to:
+
+   *  Content customization: Content varies in time and space.  For
+      example, an Internet search for "nearby restaurants" will
+      necessarily return different results for different users depending
+      on their location.  Advertisements for content may also vary based
+      on location.  Advertisements in one region may not be available in
+      another region.
+
+   *  Compliance: In some cases, content available in one region is not
+      allowed to be available in another region, perhaps due to
+      copyright restrictions or other regional reasons.  User location
+      is often used to infer these regions and enforce these rules.
+      Popular streaming services, for example, apply geo fences based on
+      user location.
+
+   *  Fraud and abuse detection: Many anti-bot detection and mitigation
+      systems use user location, or proxies for location such as IP
+      addresses, as a signal for bot detection behavior.  Observing many
+      suspicious connections coming from the same location is often,
+      though not necessarily, indicative of malicious behavior.
+
+   Most of these use cases impact user experience in one way or another.
+   Others go beyond user experience and have legal or jurisdictional
+   implications.
+
+3.2.  Geoocation Sources
+
+   There are at least two classes of geolocation APIs available:
+
+   *  Client-side APIs: These include APIs such as CoreLocation, the W3C
+      Geolocation API, and so on, which provide clients with a simple
+      API for getting location.  In most cases, these APIs are gated by
+      user consent.  That is, end-users must explicitly allow the API to
+      reveal the user location.
+
+   *  Server-side APIs: The most popular server-side API is likely
+      MaxMind, which provides a proprietary and closed API for mapping
+      an IP address to a location, along with other metadata about the
+      IP address.  Some of these services offer a free, rate-limited
+      API, whereas others offer paid variants with more options.  Unlike
+      client-side APIs, servers generally have access to client IP
+      addresses without user consent (absent proxying technologies such
+      as Private Relay or Tor).
+
+   The sources of truth for these geolocation APIs vary widely.  They
+   include, but are not limited to GPS information, network signalling
+   information (IP, RFID, WiFi and Bluetooth MAC addresses), GSM/CDMA
+   cellular network IDs, and even user input.  In most cases, the
+   signals that feed into geolocation information are unauthenticated:
+   there is no proof that the output is actually correct or originated
+   from a trusted source.  Moreover, there is no existing notion of a
+   trusted source of geolocation information as there is no way for
+   sources to present proof of correctness or authenticity.
+
+4.  Threat Model and Problem Statement
+
+   In most geolocation interactions, a relying party (server) wants to
+   learn the location of a user (client) for the purposes of addressing
+   one or more of the use cases in Section 3.1.  In this setting, we
+   consider the following threat model:
+
+   1.  Servers are malicious and want to try and learn precise client
+       location or identity, even without consent from the user.
+
+   2.  Some subset of geolocation sources (and APIs) are trusted,
+       whereas others are assumed to be malicious.  Indeed, some amount
+       of geolocation sources must be assumed to be trustworthy for any
+       use cases to work reliably.
+
+   3.  Clients are honest.  Dishonest clients can lie about their
+       geolocation information, either by sending fake information to
+       the server, or by otherwise modifying what information the server
+       sees, e.g., by changing egress IP address in server connections.
+       Servers cannot distinguish between trusted and untrusted clients
+       without additional assumptions.
+
+   Given this threat model and interaction, we ask the following
+   question: Can we design a geolocation solution that provides
+   authentic and verifiable geolocation signals?
+
+5.  Security Considerations
+
+   This document describes a threat model for geolocation use cases,
+   intended to help discussions on this problem.
+
+6.  IANA Considerations
+
+   This document makes no IANA requests.
+
+7.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://datatracker.ietf.org/doc/html/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://datatracker.ietf.org/doc/html/rfc8174>.
+
+Author's Address
+
+   Christopher A. Wood
+   Cloudflare
+
+   Email: caw@heapingbits.net
