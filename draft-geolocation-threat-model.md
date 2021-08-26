@@ -19,7 +19,7 @@ author:
 
 --- abstract
 
-This document describes a threat model for geolocation services.
+This document describes a threat model for geolocation services and interactions with users.
 
 --- middle
 
@@ -49,18 +49,37 @@ of different system entities. This document is an attempt to start the discussio
 This section describes use cases for geolocation services and sources
 for this information.
 
-## Use Cases
+## Terminology
 
-User location has a number of critical use cases on the web, including, though not limited to:
+The following terms are used throughout this document.
+
+Geolocation:
+: The geographic location of an entity, e.g., geographic coordinates.
+
+Anchor:
+: An entity with a well-known and specific geolocation.
+
+Relying Party (RP):
+: An entity that wants to learn the geolocation of another entity.
+
+User:
+: The entity to which geolocation information typically pertains.
+
+## Geolocation Use Cases
+
+User geolocation has a number of critical use cases on the web, including, though not limited to:
 
 - Content customization: Content varies in time and space. For example, an Internet
   search for “nearby restaurants” will necessarily return different results for
   different users depending on their location. Advertisements for content may also
   vary based on location. Advertisements in one region may not be available in another region.
+  These use cases do not require absolute geolocation information, i.e., it may be accurate
+  within some margin of error.
 - Compliance: In some cases, content available in one region is not allowed to be available
   in another region, perhaps due to copyright restrictions or other regional reasons. User
   location is often used to infer these regions and enforce these rules. Popular streaming
-  services, for example, apply geo fences based on user location.
+  services, for example, apply geo fences based on user location. These use cases require
+  absolute geolocation information, i.e., there is no margin of error in the information.
 - Fraud and abuse detection: Many anti-bot detection and mitigation systems use user location,
   or proxies for location such as IP addresses, as a signal for bot detection behavior.
   Observing many suspicious connections coming from the same location is often, though not
@@ -71,7 +90,7 @@ experience and have legal or jurisdictional implications.
 
 ## Geoocation Sources
 
-There are at least two classes of geolocation APIs available:
+There are at least two classes of geolocation APIs available. A description of each follows.
 
 - Client-side APIs: These include APIs such as CoreLocation, the W3C Geolocation API,
   and so on, which provide clients with a simple API for getting location. In most cases,
@@ -92,24 +111,44 @@ that the output is actually correct or originated from a trusted source. Moreove
 is no existing notion of a trusted source of geolocation information as there is no way
 for sources to present proof of correctness or authenticity.
 
-# Threat Model and Problem Statement
+## Geolocation Properties
+
+There are a number of properties one might consider with respect to geolocation information.
+A description of some properties follows.
+
+- Liveness or freshness: Geolocation information may be fresh, i.e., computed or otherwise
+  determined on demand, or it may not be. Geolocation information that is not fresh can be
+  used (or abused) by entities to influence their perceived location after having changed
+  their actual geolocation information.
+- Accuracy: Geolocation information be precise, i.e., pointing to a specific latitude and
+  longitude, or more coarse, encompassing a larger area of physical distance.
+- Consent: Geolocation may be dependent on user consent as explicit information sent to
+  or revealed from one entity to another, or it may be implicit, and inferred without consent.
+- Confidence: Geolocation information correctness may be a random variable, varying in
+  terms of how confident or correct the information may be.
+- Composition: Geolocation information may be composed to produce new geolocation information.
+  For example, two different geolocation sources may be combined to produce a single type
+  of geolocation information.
+
+# Threat Model
 
 In most geolocation interactions, a relying party (server) wants to learn the location
 of a user (client) for the purposes of addressing one or more of the use cases in
-{{use-cases}}. In this setting, we consider the following threat model:
+{{geolocation-use-cases}}. Depending on the implementation, clients may or may not
+require user consent before revealing geolocation information to the server.
+
+In this interaction, we consider the following threat model:
 
 1. Servers are malicious and want to try and learn precise client location or identity,
    even without consent from the user.
 1. Some subset of geolocation sources (and APIs) are trusted, whereas others are assumed
    to be malicious. Indeed, some amount of geolocation sources must be assumed to be
    trustworthy for any use cases to work reliably.
-1. Clients are honest. Dishonest clients can lie about their geolocation information, either
-   by sending fake information to the server, or by otherwise modifying what information the
+1. Client software is honest, but users are dishonest. Dishonest users operating clients
+   can lie about their geolocation information, either by using applications or software
+   that sends fake information to the server, or by otherwise modifying what information the
    server sees, e.g., by changing egress IP address in server connections. Servers cannot
-   distinguish between trusted and untrusted clients without additional assumptions.
-
-Given this threat model and interaction, we ask the following question: Can we design a
-geolocation solution that provides authentic and verifiable geolocation signals?
+   distinguish between honest and dishonest clients without additional assumptions.
 
 # Security Considerations {#sec-considerations}
 
@@ -121,3 +160,5 @@ discussions on this problem.
 This document makes no IANA requests.
 
 --- back
+
+
