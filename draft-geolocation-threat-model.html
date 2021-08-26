@@ -9,27 +9,9 @@
 <meta content="
        This document describes a threat model for geolocation services and interactions with users. 
     " name="description">
-<meta content="xml2rfc 3.9.1" name="generator">
+<meta content="xml2rfc 2.42.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-geolocation-threat-model-latest" name="ietf.draft">
-<!-- Generator version information:
-  xml2rfc 3.9.1
-    Python 3.9.5
-    appdirs 1.4.4
-    ConfigArgParse 1.3
-    google-i18n-address 2.5.0
-    html5lib 1.1
-    intervaltree 3.1.0
-    Jinja2 2.11.3
-    kitchen 1.2.6
-    lxml 4.6.3
-    pycountry 20.7.3
-    pyflakes 2.3.0
-    PyYAML 5.4.1
-    requests 2.25.1
-    setuptools 52.0.0
-    six 1.15.0
--->
 <link href="draft-geolocation-threat-model.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
@@ -1101,46 +1083,46 @@ address div.right {
         <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
 <a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
         </h2>
-<nav class="toc"><ul class="ulEmpty compact toc ulBare">
-<li class="ulEmpty compact toc ulBare" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
+<nav class="toc"><ul class="toc ulEmpty">
+<li class="toc ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a><a href="#section-toc.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="ulEmpty compact toc ulBare" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-requirements-notation" class="xref">Requirements Notation</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-requirements-notation" class="xref">Requirements Notation</a><a href="#section-toc.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="ulEmpty compact toc ulBare" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-geolocation-background" class="xref">Geolocation Background</a></p>
-<ul class="ulBare ulEmpty compact toc">
-<li class="ulBare ulEmpty compact toc" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-terminology" class="xref">Terminology</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="xref">3</a>.  <a href="#name-geolocation-background" class="xref">Geolocation Background</a><a href="#section-toc.1-1.3.1" class="pilcrow">¶</a></p>
+<ul class="toc ulEmpty">
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-terminology" class="xref">Terminology</a><a href="#section-toc.1-1.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulBare ulEmpty compact toc" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-geolocation-use-cases" class="xref">Geolocation Use Cases</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1" class="keepWithNext"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-geolocation-use-cases" class="xref">Geolocation Use Cases</a><a href="#section-toc.1-1.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulBare ulEmpty compact toc" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-geoocation-sources" class="xref">Geoocation Sources</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1" class="keepWithNext"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-geoocation-sources" class="xref">Geoocation Sources</a><a href="#section-toc.1-1.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
-              <li class="ulBare ulEmpty compact toc" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-geolocation-properties" class="xref">Geolocation Properties</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1" class="keepWithNext"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-geolocation-properties" class="xref">Geolocation Properties</a><a href="#section-toc.1-1.3.2.4.1" class="pilcrow">¶</a></p>
 </li>
-            </ul>
+</ul>
 </li>
-          <li class="ulEmpty compact toc ulBare" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-threat-model" class="xref">Threat Model</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1" class="keepWithNext"><a href="#section-4" class="xref">4</a>.  <a href="#name-threat-model" class="xref">Threat Model</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="ulEmpty compact toc ulBare" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1" class="keepWithNext"><a href="#section-5" class="xref">5</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="ulEmpty compact toc ulBare" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1" class="keepWithNext"><a href="#section-6" class="xref">6</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="ulEmpty compact toc ulBare" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-normative-references" class="xref">Normative References</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1" class="keepWithNext"><a href="#section-7" class="xref">7</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="ulEmpty compact toc ulBare" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="xref"></a><a href="#name-authors-address" class="xref">Author's Address</a></p>
+<li class="toc ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1" class="keepWithNext"><a href="#section-appendix.a" class="xref"></a><a href="#name-authors-address" class="xref">Author's Address</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
 </li>
-        </ul>
+</ul>
 </nav>
 </section>
 </div>
@@ -1188,31 +1170,27 @@ for this information.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
         </h3>
 <p id="section-3.1-1">The following terms are used throughout this document.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-3.1-2">
+<dl class="dlParallel" id="section-3.1-2">
           <dt id="section-3.1-2.1">
 Geolocation:  </dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-2.2">
+<dd id="section-3.1-2.2">
             <p id="section-3.1-2.2.1">The geographic location of an entity, e.g., geographic coordinates.<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
 </dd>
-          <dd class="break"></dd>
 <dt id="section-3.1-2.3">
 Anchor:  </dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-2.4">
+<dd id="section-3.1-2.4">
             <p id="section-3.1-2.4.1">An entity with a well-known and specific geolocation.<a href="#section-3.1-2.4.1" class="pilcrow">¶</a></p>
 </dd>
-          <dd class="break"></dd>
 <dt id="section-3.1-2.5">
 Relying Party (RP):  </dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-2.6">
+<dd id="section-3.1-2.6">
             <p id="section-3.1-2.6.1">An entity that wants to learn the geolocation of another entity.<a href="#section-3.1-2.6.1" class="pilcrow">¶</a></p>
 </dd>
-          <dd class="break"></dd>
 <dt id="section-3.1-2.7">
 User:  </dt>
-          <dd style="margin-left: 1.5em" id="section-3.1-2.8">
+<dd id="section-3.1-2.8">
             <p id="section-3.1-2.8.1">The entity to which geolocation information typically pertains.<a href="#section-3.1-2.8.1" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
 </dl>
 </section>
 </div>
@@ -1222,26 +1200,26 @@ User:  </dt>
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-geolocation-use-cases" class="section-name selfRef">Geolocation Use Cases</a>
         </h3>
 <p id="section-3.2-1">User geolocation has a number of critical use cases on the web, including, though not limited to:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.2-2.1">Content customization: Content varies in time and space. For example, an Internet
+<ul>
+<li id="section-3.2-2.1">Content customization: Content varies in time and space. For example, an Internet
 search for "nearby restaurants" will necessarily return different results for
 different users depending on their location. Advertisements for content may also
 vary based on location. Advertisements in one region may not be available in another region.
 These use cases do not require absolute geolocation information, i.e., it may be accurate
 within some margin of error.<a href="#section-3.2-2.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-3.2-2.2">Compliance: In some cases, content available in one region is not allowed to be available
+<li id="section-3.2-2.2">Compliance: In some cases, content available in one region is not allowed to be available
 in another region, perhaps due to copyright restrictions or other regional reasons. User
 location is often used to infer these regions and enforce these rules. Popular streaming
 services, for example, apply geo fences based on user location. These use cases require
 absolute geolocation information, i.e., there is no margin of error in the information.<a href="#section-3.2-2.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-3.2-2.3">Fraud and abuse detection: Many anti-bot detection and mitigation systems use user location,
+<li id="section-3.2-2.3">Fraud and abuse detection: Many anti-bot detection and mitigation systems use user location,
 or proxies for location such as IP addresses, as a signal for bot detection behavior.
 Observing many suspicious connections coming from the same location is often, though not
 necessarily, indicative of malicious behavior.<a href="#section-3.2-2.3" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 <p id="section-3.2-3">Most of these use cases impact user experience in one way or another. Others go beyond user
 experience and have legal or jurisdictional implications.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 </section>
@@ -1252,20 +1230,20 @@ experience and have legal or jurisdictional implications.<a href="#section-3.2-3
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-geoocation-sources" class="section-name selfRef">Geoocation Sources</a>
         </h3>
 <p id="section-3.3-1">There are at least two classes of geolocation APIs available. A description of each follows.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.3-2.1">Client-side APIs: These include APIs such as CoreLocation, the W3C Geolocation API,
+<ul>
+<li id="section-3.3-2.1">Client-side APIs: These include APIs such as CoreLocation, the W3C Geolocation API,
 and so on, which provide clients with a simple API for getting location. In most cases,
 these APIs are gated by user consent. That is, end-users must explicitly allow the API
 to reveal the user location.<a href="#section-3.3-2.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-3.3-2.2">Server-side APIs: The most popular server-side API is likely MaxMind, which provides
+<li id="section-3.3-2.2">Server-side APIs: The most popular server-side API is likely MaxMind, which provides
 a proprietary and closed API for mapping an IP address to a location, along with other
 metadata about the IP address. Some of these services offer a free, rate-limited API,
 whereas others offer paid variants with more options. Unlike client-side APIs, servers
 generally have access to client IP addresses without user consent (absent proxying
 technologies such as Private Relay or Tor).<a href="#section-3.3-2.2" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 <p id="section-3.3-3">The sources of truth for these geolocation APIs vary widely. They include, but are not
 limited to GPS information, network signalling information (IP, RFID, WiFi and Bluetooth
 MAC addresses), GSM/CDMA cellular network IDs, and even user input. In most cases, the
@@ -1282,26 +1260,26 @@ for sources to present proof of correctness or authenticity.<a href="#section-3.
         </h3>
 <p id="section-3.4-1">There are a number of properties one might consider with respect to geolocation information.
 A description of some properties follows.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.4-2.1">Liveness or freshness: Geolocation information may be fresh, i.e., computed or otherwise
+<ul>
+<li id="section-3.4-2.1">Liveness or freshness: Geolocation information may be fresh, i.e., computed or otherwise
 determined on demand, or it may not be. Geolocation information that is not fresh can be
 used (or abused) by entities to influence their perceived location after having changed
 their actual geolocation information.<a href="#section-3.4-2.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-3.4-2.2">Accuracy: Geolocation information be precise, i.e., pointing to a specific latitude and
+<li id="section-3.4-2.2">Accuracy: Geolocation information be precise, i.e., pointing to a specific latitude and
 longitude, or more coarse, encompassing a larger area of physical distance.<a href="#section-3.4-2.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-3.4-2.3">Consent: Geolocation may be dependent on user consent as explicit information sent to
+<li id="section-3.4-2.3">Consent: Geolocation may be dependent on user consent as explicit information sent to
 or revealed from one entity to another, or it may be implicit, and inferred without consent.<a href="#section-3.4-2.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-3.4-2.4">Confidence: Geolocation information correctness may be a random variable, varying in
+<li id="section-3.4-2.4">Confidence: Geolocation information correctness may be a random variable, varying in
 terms of how confident or correct the information may be.<a href="#section-3.4-2.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-3.4-2.5">Composition: Geolocation information may be composed to produce new geolocation information.
+<li id="section-3.4-2.5">Composition: Geolocation information may be composed to produce new geolocation information.
 For example, two different geolocation sources may be combined to produce a single type
 of geolocation information.<a href="#section-3.4-2.5" class="pilcrow">¶</a>
 </li>
-        </ul>
+</ul>
 </section>
 </div>
 </section>
@@ -1317,20 +1295,20 @@ of a user (client) for the purposes of addressing one or more of the use cases i
 require user consent before revealing geolocation information to the server.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">In this interaction, we consider the following threat model:<a href="#section-4-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4-3">
-<li id="section-4-3.1">Servers are malicious and want to try and learn precise client location or identity,
+        <li id="section-4-3.1">Servers are malicious and want to try and learn precise client location or identity,
 even without consent from the user.<a href="#section-4-3.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-4-3.2">Some subset of geolocation sources (and APIs) are trusted, whereas others are assumed
+<li id="section-4-3.2">Some subset of geolocation sources (and APIs) are trusted, whereas others are assumed
 to be malicious. Indeed, some amount of geolocation sources must be assumed to be
 trustworthy for any use cases to work reliably.<a href="#section-4-3.2" class="pilcrow">¶</a>
 </li>
-        <li id="section-4-3.3">Client software is honest, but users are dishonest. Dishonest users operating clients
+<li id="section-4-3.3">Client software is honest, but users are dishonest. Dishonest users operating clients
 can lie about their geolocation information, either by using applications or software
 that sends fake information to the server, or by otherwise modifying what information the
 server sees, e.g., by changing egress IP address in server connections. Servers cannot
 distinguish between honest and dishonest clients without additional assumptions.<a href="#section-4-3.3" class="pilcrow">¶</a>
 </li>
-      </ol>
+</ol>
 </section>
 </div>
 <div id="sec-considerations">
@@ -1356,17 +1334,15 @@ discussions on this problem.<a href="#section-5-1" class="pilcrow">¶</a></p>
       </h2>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
-      <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+<dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03">March 1997</time>, <span>&lt;<a href="https://doi.org/10.17487/RFC2119">https://doi.org/10.17487/RFC2119</a>&gt;</span>. </dd>
 <dt id="RFC8174">[RFC8174]</dt>
-    <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc8174">https://datatracker.ietf.org/doc/html/rfc8174</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+<dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05">May 2017</time>, <span>&lt;<a href="https://doi.org/10.17487/RFC8174">https://doi.org/10.17487/RFC8174</a>&gt;</span>. </dd>
 </dl>
 </section>
 <div id="authors-addresses">
-<section id="appendix-A">
+<section id="section-appendix.a">
       <h2 id="name-authors-address">
 <a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
       </h2>
