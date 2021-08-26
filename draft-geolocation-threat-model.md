@@ -137,18 +137,27 @@ of a user (client) for the purposes of addressing one or more of the use cases i
 {{geolocation-use-cases}}. Depending on the implementation, clients may or may not
 require user consent before revealing geolocation information to the server.
 
-In this interaction, we consider the following threat model:
+In this interaction, we consider the following server and source threat models:
 
 1. Servers are malicious and want to try and learn precise client location or identity,
-   even without consent from the user.
+   even without consent from the user. This allows servers to interact with clients or
+   any other entity as needed to subvert the user's desired privacy goals.
 1. Some subset of geolocation sources (and APIs) are trusted, whereas others are assumed
    to be malicious. Indeed, some amount of geolocation sources must be assumed to be
    trustworthy for any use cases to work reliably.
-1. Client software is honest, but users are dishonest. Dishonest users operating clients
-   can lie about their geolocation information, either by using applications or software
-   that sends fake information to the server, or by otherwise modifying what information the
-   server sees, e.g., by changing egress IP address in server connections. Servers cannot
-   distinguish between honest and dishonest clients without additional assumptions.
+
+For all use cases, servers require some trusted geolocation information from the client.
+How this information is produced varies depending on the client threat model: If the
+client is untrusted, then the location information needs to be trusted. Otherwise, if
+the client is trusted, then the location information needs to be somehow bound to the
+trusted client.
+
+Dishonest users that intentionally change, alter, or influence their geolocation are
+out of scope for this threat model. In particular, dishonest users operating clients
+can lie about their geolocation information, either by using applications or software
+that sends fake information to the server, or by otherwise modifying what information the
+server sees, e.g., by changing egress IP address in server connections. Servers cannot
+distinguish between honest and dishonest clients without additional assumptions.
 
 # Security Considerations {#sec-considerations}
 
