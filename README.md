@@ -2,15 +2,15 @@
 
 This is the working area for the individual Internet-Draft, "A Geolocation Threat Model".
 
-* [Editor's Copy](https://chris-wood.github.io/geo-ip-threat-model/#go.draft-geolocation-threat-model.html)
+* [Editor's Copy](https://chris-wood.github.io/geolocation-threat-model/#go.draft-geolocation-threat-model.html)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-geolocation-threat-model)
-* [Compare Editor's Copy to Individual Draft](https://chris-wood.github.io/geo-ip-threat-model/#go.draft-geolocation-threat-model.diff)
+* [Compare Editor's Copy to Individual Draft](https://chris-wood.github.io/geolocation-threat-model/#go.draft-geolocation-threat-model.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/chris-wood/geo-ip-threat-model/blob/master/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/chris-wood/geolocation-threat-model/blob/master/CONTRIBUTING.md).
 
 Contributions can be made by editing markdown through the GitHub interface.
 
