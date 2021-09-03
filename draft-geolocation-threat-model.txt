@@ -4,8 +4,8 @@
 
 Network Working Group                                          C.A. Wood
 Internet-Draft                                                Cloudflare
-Intended status: Informational                            26 August 2021
-Expires: 27 February 2022
+Intended status: Informational                          3 September 2021
+Expires: 7 March 2022
 
 
                        A Geolocation Threat Model
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 February 2022.
+   This Internet-Draft will expire on 7 March 2022.
 
 Copyright Notice
 
@@ -166,14 +166,13 @@ Table of Contents
       user consent.  That is, end-users must explicitly allow the API to
       reveal the user location.
 
-   *  Server-side APIs: The most popular server-side API is likely
-      MaxMind, which provides a proprietary and closed API for mapping
-      an IP address to a location, along with other metadata about the
-      IP address.  Some of these services offer a free, rate-limited
-      API, whereas others offer paid variants with more options.  Unlike
-      client-side APIs, servers generally have access to client IP
-      addresses without user consent (absent proxying technologies such
-      as Private Relay or Tor).
+   *  Server-side APIs: Many online services provide proprietary APIs
+      for mapping an IP address to a location, along with other metadata
+      about the IP address.  Some of these services offer a free, rate-
+      limited API, whereas others offer paid variants with more options.
+      Unlike client-side APIs, servers generally have access to client
+      IP addresses without user consent (absent proxying technologies
+      such as Private Relay or Tor).
 
    The sources of truth for these geolocation APIs vary widely.  They
    include, but are not limited to GPS information, network signalling
@@ -202,7 +201,7 @@ Table of Contents
 
    *  Consent: Geolocation may be dependent on user consent as explicit
       information sent to or revealed from one entity to another, or it
-      may be implicit, and inferred without consent.
+      may be implicit and inferred without consent.
 
    *  Confidence: Geolocation information correctness may be a random
       variable, varying in terms of how confident or correct the
