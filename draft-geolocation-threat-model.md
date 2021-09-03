@@ -96,12 +96,11 @@ There are at least two classes of geolocation APIs available. A description of e
   and so on, which provide clients with a simple API for getting location. In most cases,
   these APIs are gated by user consent. That is, end-users must explicitly allow the API
   to reveal the user location.
-- Server-side APIs: The most popular server-side API is likely MaxMind, which provides
-  a proprietary and closed API for mapping an IP address to a location, along with other
-  metadata about the IP address. Some of these services offer a free, rate-limited API,
-  whereas others offer paid variants with more options. Unlike client-side APIs, servers
-  generally have access to client IP addresses without user consent (absent proxying
-  technologies such as Private Relay or Tor).
+- Server-side APIs: Many online services provide proprietary APIs for mapping an IP address
+  to a location, along with other metadata about the IP address. Some of these services offer
+  a free, rate-limited API, whereas others offer paid variants with more options. Unlike
+  client-side APIs, servers generally have access to client IP addresses without user consent
+  (absent proxying technologies such as Private Relay or Tor).
 
 The sources of truth for these geolocation APIs vary widely. They include, but are not
 limited to GPS information, network signalling information (IP, RFID, WiFi and Bluetooth
@@ -123,7 +122,7 @@ A description of some properties follows.
 - Accuracy: Geolocation information be precise, i.e., pointing to a specific latitude and
   longitude, or more coarse, encompassing a larger area of physical distance.
 - Consent: Geolocation may be dependent on user consent as explicit information sent to
-  or revealed from one entity to another, or it may be implicit, and inferred without consent.
+  or revealed from one entity to another, or it may be implicit and inferred without consent.
 - Confidence: Geolocation information correctness may be a random variable, varying in
   terms of how confident or correct the information may be.
 - Composition: Geolocation information may be composed to produce new geolocation information.
