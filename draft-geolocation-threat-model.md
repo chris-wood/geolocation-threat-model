@@ -57,7 +57,7 @@ Geolocation:
 : The geographic location of an entity, e.g., geographic coordinates.
 
 Anchor:
-: An entity with a well-known and specific geolocation.
+: An entity and geolocation source with a well-known and specific geolocation.
 
 Relying Party (RP):
 : An entity that wants to learn the geolocation of another entity.
@@ -96,16 +96,17 @@ There are at least two classes of geolocation APIs available. A description of e
   and so on, which provide clients with a simple API for getting location. In most cases,
   these APIs are gated by user consent. That is, end-users must explicitly allow the API
   to reveal the user location.
-- Server-side APIs: Many online services provide proprietary APIs for mapping an IP address
+- Online services: Many online services provide proprietary APIs for mapping an IP address
   to a location, along with other metadata about the IP address. Some of these services offer
   a free, rate-limited API, whereas others offer paid variants with more options. Unlike
   client-side APIs, servers generally have access to client IP addresses without user consent
-  (absent proxying technologies such as Private Relay or Tor).
+  (absent proxying technologies such as Private Relay or Tor). Other variants depend on
+  Anchors for the purposes of relative positioning.
 
-The sources of truth for these geolocation APIs vary widely. They include, but are not
-limited to GPS information, network signalling information (IP, RFID, WiFi and Bluetooth
-MAC addresses), GSM/CDMA cellular network IDs, and even user input. In most cases, the
-signals that feed into geolocation information are unauthenticated: there is no proof
+The sources of truth for these geolocation APIs and services vary widely. They include, but
+are not limited to GPS information, network signalling information (IP, RFID, WiFi and
+Bluetooth MAC addresses), GSM/CDMA cellular network IDs, and even user input. In most cases,
+the signals that feed into geolocation information are unauthenticated: there is no proof
 that the output is actually correct or originated from a trusted source. Moreover, there
 is no existing notion of a trusted source of geolocation information as there is no way
 for sources to present proof of correctness or authenticity.
@@ -131,7 +132,7 @@ A description of some properties follows.
 
 # Threat Model
 
-In most geolocation interactions, a relying party (server) wants to learn the location
+In most geolocation interactions, a Relying Party (server) wants to learn the location
 of a user (client) for the purposes of addressing one or more of the use cases in
 {{geolocation-use-cases}}. Depending on the implementation, clients may or may not
 require user consent before revealing geolocation information to the server.
@@ -145,18 +146,20 @@ In this interaction, we consider the following server and source threat models:
    to be malicious. Indeed, some amount of geolocation sources must be assumed to be
    trustworthy for any use cases to work reliably.
 
-For all use cases, servers require some trusted geolocation information from the client.
-How this information is produced varies depending on the client threat model: If the
-client is untrusted, then the location information needs to be trusted. Otherwise, if
-the client is trusted, then the location information needs to be somehow bound to the
-trusted client.
+Network characteristics between clients and servers such as latency and round trip time
+are assumed untrusted. For example, clients can alter the round trip time by artificially
+delaying packets. On-path attackers have the same capability.
 
-Dishonest users that intentionally change, alter, or influence their geolocation are
-out of scope for this threat model. In particular, dishonest users operating clients
-can lie about their geolocation information, either by using applications or software
-that sends fake information to the server, or by otherwise modifying what information the
-server sees, e.g., by changing egress IP address in server connections. Servers cannot
-distinguish between honest and dishonest clients without additional assumptions.
+In contrast, path characteristics such as routing are assumed trusted. Attacks which
+subvert or otherwise modify path-layer information at the routing layer are technically
+challenging to address. For example, clients may lie about their geolocation by tampering
+with path characteristics, e.g., by changing egress IP address in server connections.
+Likewise, attackers may interfere with BGP or other Internet routing to influence
+geolocation services.
+
+Servers cannot distinguish between honest and dishonest clients without additional
+assumptions. Even with such a distinguisher, attacks that modify path characteristics
+remain.
 
 # Security Considerations {#sec-considerations}
 
