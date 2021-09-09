@@ -137,7 +137,7 @@ of a user (client) for the purposes of addressing one or more of the use cases i
 {{geolocation-use-cases}}. Depending on the implementation, clients may or may not
 require user consent before revealing geolocation information to the server.
 
-In this interaction, we consider the following server and source threat models:
+In this interaction, we consider the following server, source, and anchor threat models:
 
 1. Servers are malicious and want to try and learn precise client location or identity,
    even without consent from the user. This allows servers to interact with clients or
@@ -145,10 +145,13 @@ In this interaction, we consider the following server and source threat models:
 1. Some subset of geolocation sources (and APIs) are trusted, whereas others are assumed
    to be malicious. Indeed, some amount of geolocation sources must be assumed to be
    trustworthy for any use cases to work reliably.
+1. Some subset of anchors are trusted, whereas others are assumed to be malicious. A malicious
+   anchor can minimally share its private key material with other anchors or entities.
 
 Network characteristics between clients and servers such as latency and round trip time
-are assumed untrusted. For example, clients can alter the round trip time by artificially
-delaying packets. On-path attackers have the same capability.
+are attacker-controlled and therefore assumed untrusted. For example, clients can alter
+the round trip time by artificially delaying packets. On-path attackers have the same
+capability.
 
 In contrast, path characteristics such as routing are assumed trusted. Attacks which
 subvert or otherwise modify path-layer information at the routing layer are technically
